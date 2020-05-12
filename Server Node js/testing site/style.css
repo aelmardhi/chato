@@ -1,0 +1,42 @@
+body{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    padding: 0 auto;
+}
+.info{
+    display: block;
+    width: 30%;
+        overflow: hidden;
+}
+
+#messages {
+    width: 60%;
+    height: 600px;
+    overflow-y: scroll;
+}
+.out {
+  background-color: aquamarine;  
+    padding: 5px;
+    min-width: 60%;
+}
+
+.in {
+    background-color: beige;
+    text-align: end;
+    padding: 5px;
+    min-width: 60%;
+}
+span{
+    color: lightblue;
+    text-align: right;
+    font-size: .6rem;
+}
+
+.in span {
+    color: darkcyan;
+    text-align: left;
+}

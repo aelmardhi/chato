@@ -1,0 +1,79 @@
+////set GIT_SSL_NO_VERIFY=true 
+
+register new user
+post http://localhost:3000/api/user/register
+{
+    name:
+    username:
+    password:
+}
+
+login user
+post http://localhost:3000/api/user/login
+{
+    username:
+    password:
+}
+you then well have a token use it as header of auth-token for any other request
+
+do {
+get messages
+get http://localhost:3000/api/messages/text
+{
+    ref:
+    _id:
+    text:
+}
+if (ref === 'none){
+save msg to db and show it
+}else {
+find msge._id == ref
+switch (msg.text){
+'sent' msg. status =sent
+'delivered' msg. status =delivered
+'seen' msg. status =seen
+}
+}
+
+if (msg){
+delete msg
+post http://localhost:3000/api/messages/delete/text
+{
+_id : msg._id
+}
+}
+
+}
+while(msg)
+
+for(msg : queue){
+send msg
+post /send/msg.user/text
+{
+text : msg.text
+ref : msg.text
+}
+gueue.remove(queue)
+}
+
+//////////
+when seen send seen message by adding to queue 
+{
+text : 'seen',
+ref: msg._id,
+user: msg.user
+}
+transfer queue
+
+//////////////////////
+when send pressed add to queue 
+{
+text : input.value,
+user: chat.user
+}
+
+get user data
+get user/username
+
+
+
