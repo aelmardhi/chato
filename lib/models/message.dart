@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 import 'dart:math';
+import 'package:chato/models/connect.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -85,7 +86,8 @@ class Message {
       STATUS: status,
       DATE: date.toIso8601String()
     });}catch(e){
-      return;
+      if (id != null)await Connect.delete(id);
+      rethrow;
     }
   }
   static updateStatus(String id,String status) async{

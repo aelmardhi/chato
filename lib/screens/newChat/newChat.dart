@@ -53,7 +53,7 @@ class _NewChatState extends State<NewChat> {
       return GestureDetector(
         onTap: ()async{
           await User.add(user.id, user.name, user.username, user.about, user.v, user.profileImage, user.lastseen);
-          await Message.add(await Config.messageCount, 'read', user.username, 'You are now connected on chato', 'none', DateTime.now());
+          await Message.add(await Config.messageCount, 'none', user.username, 'You are now connected on chato', 'read', DateTime.now());
           await user.updateMessages();
           Navigator.popAndPushNamed(context, ChatRoute,arguments: {'user':user});
         },

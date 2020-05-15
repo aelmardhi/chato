@@ -105,7 +105,11 @@ class _LoginState extends State<Login> {
       setState(() {
         message = "field should not be empty";
       });
-    }else{
+    }else if (usernameController.text.contains(' ')) {
+      setState(() {
+        message = "username should not have spaces";
+      });
+    }else {
       Scaffold.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 10),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         content: Container(

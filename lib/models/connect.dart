@@ -116,12 +116,12 @@ class Connect {
                   index, data['from'], text, platformChannelSpecifics,
                   payload: data['from']);
             }
-            await _delete(data['_id']);
+            await delete(data['_id']);
           }
         }
       }catch (e) {
         bussy = false;
-//       if (data != null && data['_id'] != null)await _delete(data['_id']);
+//       if (data != null && data['_id'] != null)await delete(data['_id']);
         debugPrint('Connect get Messages'+e.toString());
         return;
       }
@@ -129,7 +129,7 @@ class Connect {
     bussy = false;
   }
 
-    static _delete(String id)async{
+    static delete(String id)async{
     try {
       if (id == null) return;
       String token = await Config.authToken;
@@ -217,7 +217,8 @@ class Connect {
                 'auth-token': token
               });
           String res = response.body;
-          if (response.statusCode == 200) {
+          if (res ==  null )Queue.push(_id);
+          else if (response.statusCode < 300) {
             if (res != null) {
               Map<String, dynamic> data = json.decode(res);
               if(message.status == 'queued') {
@@ -231,6 +232,8 @@ class Connect {
                 Message.updateStatus(message.id, 'read');
               }
             }
+          }else{
+            Queue.push(_id);
           }
         }
       }catch(e){

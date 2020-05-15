@@ -116,6 +116,10 @@ class _RegisterState extends State<Register> {
       setState(() {
         message = "field should not be empty";
       });
+    }else if (usernameController.text.contains(' ')) {
+      setState(() {
+        message = "username should not have spaces";
+      });
     }else{
       setState(() {
         Scaffold.of(context).showSnackBar(SnackBar(
